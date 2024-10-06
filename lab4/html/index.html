@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD JavaScript App</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<h1>Item Management</h1>
+
+<div class="itemsManagementContainer">
+    <form id="createForm">
+        <label for="itemName">Item Name:</label>
+        <input type="text" id="itemName" required>
+
+        <label for="itemDescription">Item Description:</label>
+        <textarea id="itemDescription" required></textarea>
+
+        <label for="itemCategory">Category:</label>
+        <input type="text" id="itemCategory" required>
+
+        <label for="itemPrice">Price:</label>
+        <input type="number" id="itemPrice" required>
+
+        <button type="submit">Add Item</button>
+    </form>
+
+    <ul id="itemList"></ul>
+</div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>
