@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD JavaScript App: View Page</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<h1>Car Inventory</h1>
+
+<div class="controls">
+    <button id="sort-by-model">Sort by Model</button>
+    <button id="sort-by-price">Sort by Price</button>
+    <button id="sort-by-year">Sort by Year</button>
+    <button id="sort-by-country">Sort by Country</button>
+    <input type="text" id="search" placeholder="Search...">
+</div>
+<p>Total Cars: <span id="total-cars">0</span></p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Model</th>
+        <th>Price</th>
+        <th>Year</th>
+        <th>Country</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="car-table-body">
+    </tbody>
+</table>
+
+<!-- Add Car Form -->
+<h2>Add New Car</h2>
+<form id="create-car-form">
+    <input type="text" id="model" placeholder="Model" required />
+    <input type="number" id="price" placeholder="Price" required />
+    <input type="number" id="year" placeholder="Year" required />
+    <input type="text" id="country" placeholder="Country" required />
+    <button type="submit">Add Car</button>
+</form>
+
+<script type="module" src="./js/script.js"></script>
+</body>
+</html>
