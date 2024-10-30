@@ -4,7 +4,7 @@ import Header from "./components/Header/Header";
 import ProductList from "./components/ProductList/ProductList";
 import Footer from "./components/Footer/Footer";
 import Feedback from "./components/Feedback/Feedback";
-import MainBanner from "./MainBanner/MainBanner";
+import MainBanner from "./components/MainBanner/MainBanner";
 
 function App() {
     return (
