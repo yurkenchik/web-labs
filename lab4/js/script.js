@@ -60,16 +60,22 @@ document.getElementById('create-car-form').addEventListener('submit', (e) => {
     e.preventDefault();
 
     const newCar = {
-        id: cars.length + 1, // Auto-increment ID
+        id: cars.length + 1,
         model: document.getElementById('model').value,
         price: parseFloat(document.getElementById('price').value),
         year: parseInt(document.getElementById('year').value),
         country: document.getElementById('country').value,
     };
 
+    const existingCar = cars.find(car => car.model === newCar.model);
+    if (existingCar) {
+        alert("Car exists!");
+        return null;
+    }
+
     cars.push(newCar);
     localStorage.setItem('cars', JSON.stringify(cars));
-    displayCars(cars); // Refresh the car list
+    displayCars(cars);
     document.getElementById('create-car-form').reset();
 });
 
