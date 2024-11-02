@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./CatalogFilterPanel.css";
+import SortSelect from "../SortSelect/SortSelect";
 
 const CatalogFilterPanel = ({ onSortChange, onSearchChange }) => {
     const [sortOrder, setSortOrder] = useState('asc');
@@ -29,13 +30,7 @@ const CatalogFilterPanel = ({ onSortChange, onSearchChange }) => {
                     />
                 </div>
 
-                <div className="sort-select">
-                    <label htmlFor="sortOrder">Sort by Price: </label>
-                    <select id="sortOrder" value={sortOrder} onChange={handleSortChange}>
-                        <option value="asc">Lowest to Highest</option>
-                        <option value="desc">Highest to Lowest</option>
-                    </select>
-                </div>
+                <SortSelect sortOrder={sortOrder} onSortChange={handleSortChange} />
             </div>
         </div>
     );

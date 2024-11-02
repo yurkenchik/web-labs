@@ -25,6 +25,8 @@ function ProductList() {
         setFilteredProducts(updatedProducts);
     }, [sortOrder, searchTerm]);
 
+    useEffect(() => console.log(), [sortOrder]);
+
     return (
         <section className="product-list-section">
             <h2>Products</h2>
