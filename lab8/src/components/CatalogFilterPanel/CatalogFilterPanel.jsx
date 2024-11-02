@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import "./CatalogFilterPanel.css";
-import SortSelect from "../SortSelect/SortSelect";
+import { ProductContext } from "../../context/ProductContext";
 
-const CatalogFilterPanel = ({ onSortChange, onSearchChange }) => {
-    const [sortOrder, setSortOrder] = useState('asc');
-    const [searchTerm, setSearchTerm] = useState('');
+const CatalogFilterPanel = () => {
+    const { setSortOrder, setSearchTerm, sortOrder, searchTerm } = useContext(ProductContext);
 
     const handleSortChange = (e) => {
         const value = e.target.value;
         setSortOrder(value);
-        onSortChange(value);
     };
 
     const handleSearchChange = (e) => {
         const value = e.target.value;
         setSearchTerm(value);
-        onSearchChange(value);
     };
 
     return (
@@ -30,7 +27,13 @@ const CatalogFilterPanel = ({ onSortChange, onSearchChange }) => {
                     />
                 </div>
 
-                <SortSelect sortOrder={sortOrder} onSortChange={handleSortChange} />
+                <div className="sort-select">
+                    <label htmlFor="sortOrder">Sort by Price: </label>
+                    <select id="sortOrder" value={sortOrder} onChange={handleSortChange}>
+                        <option value="asc">Lowest to Highest</option>
+                        <option value="desc">Highest to Lowest</option>
+                    </select>
+                </div>
             </div>
         </div>
     );
