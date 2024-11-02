@@ -1,0 +1,24 @@
+.catalog-filter-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.search-input input {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.sort-select {
+    display: flex;
+    align-items: center;
+}
+
+.sort-select select {
+    margin-left: 10px;
+    padding: 5px;
+}
