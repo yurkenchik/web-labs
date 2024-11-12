@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import "./CatalogFilterPanel.css";
-import { ProductContext } from "../../context/ProductContext";
+import {CarContext} from "../../context/CarContext";
 
 const CatalogFilterPanel = () => {
-    const { setSortOrder, setSearchTerm, sortOrder, searchTerm } = useContext(ProductContext);
+    const { setSortOrder, setSearchTerm, sortOrder, searchTerm } = useContext(CarContext);
 
     const handleSortChange = (e) => {
         const value = e.target.value;
