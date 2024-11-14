@@ -18,6 +18,9 @@ export class Car {
     @Column({ type: 'varchar', nullable: true })
     country: string;
 
+    @Column({ type: 'varchar', nullable: true })
+    imageUrl: string;
+
     @CreateDateColumn()
     createdAt: Date;
 

@@ -60,16 +60,16 @@ export class CarService extends CarRepository {
     }
 
     async getCars(getCarsFilterOptionsDto: GetCarsFilterOptionsDto): Promise<Array<Car>> {
-        let { searchTerm, sortField } = getCarsFilterOptionsDto;
+        let { searchTerm, sortOrder } = getCarsFilterOptionsDto;
         const queryBuilder  = this.carRepository.createQueryBuilder("car");
 
-        if (searchTerm) {
+        if (searchTerm?.trim()) {
             searchTerm = searchTerm?.trim();
             queryBuilder.where("car.model LIKE :searchTerm", { searchTerm: `%${searchTerm}%` });
         }
 
-        if (sortField) {
-            queryBuilder.orderBy(`car.${sortField}`, "ASC");
+        if (sortOrder) {
+            queryBuilder.orderBy(`car.price`, sortOrder.toUpperCase() as "ASC" | "DESC");
         }
         return queryBuilder.getMany();
     }

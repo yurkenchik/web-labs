@@ -1,4 +1,4 @@
-import {IsNotEmpty, IsString, Max, Min} from "class-validator";
+import {IsNotEmpty, IsString, IsUrl, Max, Min} from "class-validator";
 
 export class CreateCarDto {
     @IsNotEmpty()
@@ -15,4 +15,7 @@ export class CreateCarDto {
     readonly year: number;
 
     readonly country: string;
+
+    @IsUrl()
+    imageUrl: string;
 }
