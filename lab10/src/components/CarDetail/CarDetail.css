@@ -1,0 +1,25 @@
+.car-detail {
+    height: 548px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.car-image {
+    width: 60%;
+    height: 300px;
+}
+
+button {
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    transition: 0.5s ease-in-out;
+}
+
+button:hover {
+    background-color: blue;
+}
