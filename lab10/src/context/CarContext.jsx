@@ -16,7 +16,6 @@ export const CarProvider = ({ children }) => {
         setLoading(true);
         setError(null);
 
-        // Creating the filter options for the API call
         const filterOptions = {
             searchTerm: searchTerm.trim() || null,
             sortOrder: sortOrder || "asc"

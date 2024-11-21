@@ -1,0 +1,215 @@
+/* Main container for form and details layout */
+.container {
+    width: 900px;
+    border: transparent;
+    display: grid;
+    border-radius: 16px;
+    grid-template-columns: 60% 40%;
+    box-shadow:
+            0 0 30px #57dffe6b,
+            0 0 25px #57dffe48,
+            0 0 25px #57dffe54,
+            0 0 5px #57dffe36,
+            0 0 5px rgba(255, 255, 255, 0.356),
+            0 0 20px white,
+            0 0 1px rgba(255, 255, 255, 0.308);
+}
+
+/* Form container styles */
+.form {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Details section styling */
+.details {
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: transparent;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    padding: 30px;
+    border-radius: 16px;
+    background: rgb(92, 242, 253);
+    background: linear-gradient(
+            198deg,
+            rgba(92, 242, 253, 0.765661252900232) 0%,
+            rgba(86, 215, 255, 0.7053364269141531) 30%,
+            rgba(83, 198, 255, 1) 71%,
+            rgba(77, 176, 254, 1) 80%
+    );
+}
+
+/* Label styling */
+.text-label {
+    color: #0c9bb4;
+    font-weight: 600;
+    font-size: 18px;
+    text-shadow: #73acde;
+}
+
+/* Input box styling */
+.text-box {
+    width: 250px;
+    padding-left: .5rem;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
+    color: #4cbed8fb;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+    box-shadow: 0 0 5px #57dffe6b, 0 0 5px #57dffe48, 0 0 5px #57dffe54,
+    0 0 5px #57dffe36, 0 0 5px rgba(255, 255, 255, 0.356), 0 0 1px white,
+    0 0 1px rgba(255, 255, 255, 0.308);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Focus state for input boxes */
+.text-box:focus {
+    box-shadow: 0 0 6px #57defe, 0 0 6px #57defe, 0 0 6px #57defe, 0 0 6px #57defe,
+    0 0 6px white, 0 0 6px white, 0 0 6px white;
+}
+
+/* Placeholder text styling for input boxes */
+.text-box::placeholder {
+    color: #32c5e6;
+    padding: 10px;
+}
+
+/* Container for each input field */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+/* Font styling for the form */
+.kanit-bold {
+    font-family: "Kanit", sans-serif;
+    font-style: normal;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+/* Submit button styling */
+.submit-btn {
+    border: 1px solid rgb(243, 243, 243); /* Semi-transparent white border */
+    background: linear-gradient(
+            45deg,
+            rgba(92, 242, 253, 0.765661252900232) 0%,
+            rgba(86, 215, 255, 0.7053364269141531) 30%,
+            rgba(83, 198, 255, 1) 71%,
+            rgba(77, 176, 254, 1) 80%
+    );
+    margin-left: 60px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    backdrop-filter: blur(10px); /* Creates the glassy effect */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), /* Soft shadow */
+    inset 0 1px 1px rgba(255, 255, 255, 0.2); /* Inner shadow for depth */
+    color: white;
+    padding: 10px 20px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover state for the submit button */
+.submit-btn:hover {
+    transform: translateY(1px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Heading styling in the details section */
+.heading {
+    color: #000000;
+    font-family: rowdies;
+}
+
+/* Details heading styling */
+.details-heading {
+    color: white;
+    font-size: 45px;
+    font-family: acme;
+    animation: fadeInUp 1.5s ease-in-out;
+}
+
+/* Details paragraph styling */
+.details-para {
+    color: white;
+    font-size: 30px;
+    font-family: sevillana;
+    animation: fadeInUp 2s ease-in-out;
+}
+
+/* Button to toggle password visibility */
+.view-btn {
+    border: 1px solid rgb(243, 243, 243); /* Semi-transparent white border */
+    background: linear-gradient(
+            45deg,
+            rgba(92, 242, 253, 0.765661252900232) 0%,
+            rgba(86, 215, 255, 0.7053364269141531) 30%,
+            rgba(83, 198, 255, 1) 71%,
+            rgba(77, 176, 254, 1) 80%
+    );
+    margin-left: 8px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    backdrop-filter: blur(10px); /* Creates the glassy effect */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), /* Soft shadow */
+    inset 0 1px 1px rgba(255, 255, 255, 0.2); /* Inner shadow for depth */
+    color: white;
+    padding: 1px 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover state for the view password button */
+.view-btn:hover {
+    transform: translateY(1px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Password strength indicators */
+.poor {
+    box-shadow: 0 0 5px #ff01016b, 0 0 5px #ff000048, 0 0 5px #e6060654,
+    0 0 5px #57dffe36, 0 0 5px rgba(255, 255, 255, 0.356), 0 0 1px white,
+    0 0 1px rgba(255, 255, 255, 0.308);
+}
+
+.medium {
+    box-shadow: 0 0 5px #f3f7026b, 0 0 5px #fffb0048, 0 0 5px #ffe601bd,
+    0 0 5px #57dffe36, 0 0 5px rgba(255, 255, 255, 0.356), 0 0 1px white,
+    0 0 1px rgba(255, 255, 255, 0.308);
+}
+
+.strong {
+    box-shadow: 0 0 5px #08f7006b, 0 0 5px #3bfc0048, 0 0 5px #00ff0d54,
+    0 0 5px #57dffe36, 0 0 5px rgba(255, 255, 255, 0.356), 0 0 1px white,
+    0 0 1px rgba(255, 255, 255, 0.308);
+}
+
+/* Body styling */
+.body {
+    height: 98vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

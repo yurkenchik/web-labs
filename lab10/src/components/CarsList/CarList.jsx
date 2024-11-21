@@ -56,7 +56,7 @@ const CarList = () => {
                         <CarItem key={car.id} car={car} />
                     ))
                 ) : (
-                    <p>No cars match your criteria.</p>
+                    <p>Loading...</p>
                 )}
             </div>
 

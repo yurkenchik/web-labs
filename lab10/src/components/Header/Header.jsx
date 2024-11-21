@@ -9,9 +9,10 @@ function Header() {
             <nav>
                 <ul>
                     <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">Background history</Link></li>
+                    <li><Link to="/bucket">Bucket</Link></li>
                     <li><Link to="/catalog">Catalog</Link></li>
                     <li><Link to="/contact">Contact Us</Link></li>
+                    <li><Link to="/register">Sign Up</Link></li>
                 </ul>
             </nav>
         </header>

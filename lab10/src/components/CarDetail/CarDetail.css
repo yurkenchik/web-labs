@@ -1,5 +1,5 @@
 .car-detail {
-    height: 548px;
+    height: max-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,8 +7,8 @@
 }
 
 .car-image {
-    width: 60%;
-    height: 300px;
+    width: 40%;
+    height: 350px;
 }
 
 button {
@@ -22,4 +22,72 @@ button {
 
 button:hover {
     background-color: blue;
+}
+
+/* Container styles for counter and dropdown */
+.car-detail .counter,
+.car-detail .dropdown {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 300px;
+}
+
+/* Counter styles */
+.car-detail .counter p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.car-detail .counter button {
+    margin-right: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.car-detail .counter button:hover {
+    background-color: #0056b3;
+}
+
+/* Dropdown styles */
+.car-detail .dropdown label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.car-detail .dropdown select {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.car-detail .dropdown select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* General styles for responsiveness */
+.car-detail .counter,
+.car-detail .dropdown {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.car-detail-button {
+    width: 130px;
 }
