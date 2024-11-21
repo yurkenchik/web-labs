@@ -5,6 +5,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import {CarModule} from "../car/car.module";
 import {DatabaseService} from "../database/orm/database.service";
+import {BucketModule} from "../bucket/bucket.module";
 
 @Module({
     imports: [
@@ -16,7 +17,8 @@ import {DatabaseService} from "../database/orm/database.service";
         ConfigModule.forRoot({
             isGlobal: true
         }),
-        CarModule
+        CarModule,
+        BucketModule,
     ],
     controllers: [AppController],
     providers: [AppService, DatabaseService],

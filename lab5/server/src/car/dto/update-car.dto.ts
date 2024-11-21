@@ -1,18 +1,12 @@
-import {IsNotEmpty, IsString, Max, Min} from "class-validator";
+import {IsOptional} from "class-validator";
 
 export class UpdateCarDto {
-    @IsNotEmpty()
-    @IsString()
+    @IsOptional()
     readonly model: string;
-
-    @IsNotEmpty()
-    @Min(0)
+    @IsOptional()
     readonly price: number;
-
-    @IsNotEmpty()
-    @Min(2000)
-    @Max(new Date().getTime())
+    @IsOptional()
     readonly year: number;
-
+    @IsOptional()
     readonly country: string;
 }

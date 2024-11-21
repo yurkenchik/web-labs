@@ -18,6 +18,9 @@ export class Car {
     @Column({ type: 'varchar', nullable: true })
     country: string;
 
+    @Column({ type: "integer", default: 10 })
+    quantity: number;
+
     @Column({ type: 'varchar', nullable: true })
     imageUrl: string;
 
