@@ -1,0 +1,39 @@
+.bucket-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    gap: 15px;
+}
+
+.bucket-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.bucket-item-details {
+    flex-grow: 1;
+}
+
+.bucket-item h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.bucket-item-delete {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.bucket-item-delete:hover {
+    background-color: #ff1a1a;
+}
