@@ -17,6 +17,9 @@ export class BucketItem {
     @Column({ type: 'integer', default: 1 })
     quantity: number;
 
+    @Column({ type: "varchar", default: null })
+    year: number;
+
     @CreateDateColumn()
     createdAt: Date;
 

@@ -24,7 +24,10 @@ const registerFormSchema = Yup.object().shape({
         .min(2, "Minimum 2 characters"),
     email: Yup.string()
         .required("Required")
-        .email("Invalid Email"),
+        .matches(
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            "Invalid Email"
+        ),
     password: Yup.string()
         .required("Required")
         .min(8, "Minimum 8 characters"),

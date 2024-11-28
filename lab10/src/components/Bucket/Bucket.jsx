@@ -5,7 +5,7 @@ import BucketItem from "../BucketItem/BucketItem";
 import {
     deleteBucketItem,
     fetchBucketItems,
-    removeBucketItem,
+    increaseGoodQuantityInBucket,
     removeGoodFromBucket
 } from "../../store/slices/BucketSlice";
 
@@ -25,6 +25,10 @@ const Bucket = () => {
         dispatch(deleteBucketItem(id));
     };
 
+    const increaseBucketItemQuantity = (id) => {
+        dispatch(increaseGoodQuantityInBucket(id));
+    };
+
     const handleRemoveBucketItem = (id) => {
         dispatch(removeGoodFromBucket(id));
     }
@@ -39,7 +43,7 @@ const Bucket = () => {
 
     const totalCost = bucketItems.reduce((sum, item) => {
         const price = typeof item.car.price === 'string'
-            ? parseFloat(item.car.price.split("$")[1]) || 0
+            ? parseInt(item.car.price.split("$")[1]) || 0
             : item.car.price || 0;
 
         const quantity = item.car.quantity || 0;
@@ -56,6 +60,7 @@ const Bucket = () => {
                         item={item}
                         onDelete={handleDelete}
                         onRemoveItem={handleRemoveBucketItem}
+                        onIncreaseQuantity={() => increaseBucketItemQuantity(item.id)}
                     />
                 ))}
             </div>

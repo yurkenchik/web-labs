@@ -36,6 +36,14 @@ export const deleteBucketItem = createAsyncThunk(
     }
 );
 
+export const increaseGoodQuantityInBucket = createAsyncThunk(
+    'bucket/increaseGoodQuantityInBucket',
+    async (bucketItemId) => {
+        const response = await bucketService.increaseBucketItemQuantity(bucketItemId);
+        return response; // Assuming the API returns the updated quantity.
+    }
+);
+
 const bucketSlice = createSlice({
     name: 'bucket',
     initialState: {
@@ -105,7 +113,23 @@ const bucketSlice = createSlice({
             .addCase(deleteBucketItem.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
+            })
+            .addCase(increaseGoodQuantityInBucket.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(increaseGoodQuantityInBucket.fulfilled, (state, action) => {
+                state.loading = false;
+                const updatedItem = state.items.find((item) => item.id === action.payload.id);
+                if (updatedItem) {
+                    updatedItem.quantity = action.payload.quantity; // Update the quantity
+                }
+            })
+            .addCase(increaseGoodQuantityInBucket.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
             });
+
     },
 });
 

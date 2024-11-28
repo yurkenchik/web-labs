@@ -4,10 +4,10 @@ import {Car} from "./car.entity";
 import {Repository} from "typeorm";
 import {CreateCarDto} from "./dto/create-car.dto";
 import {GetCarsFilterOptionsDto} from "./dto/get-cars-filter-options.dto";
-import {CarNotFoundException} from "../exceptions/car-not-found.exception";
+import {CarNotFoundException} from "../common/exceptions/car-not-found.exception";
 import {UpdateCarDto} from "./dto/update-car.dto";
 import {CarRepository} from "../repositories/car.repository";
-import {CarAlreadyExistsException} from "../exceptions/car-already-exists.exception";
+import {CarAlreadyExistsException} from "../common/exceptions/car-already-exists.exception";
 
 @Injectable()
 export class CarService extends CarRepository {

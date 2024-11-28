@@ -41,6 +41,14 @@ export const deleteBucketItem = createAsyncThunk(
     }
 );
 
+export const increaseBucketItemQuantity = createAsyncThunk(
+    'bucket/increaseBucketItemQuantity',
+    async (bucketItemId) => {
+        const response = await bucketService.increaseBucketItemQuantity(bucketItemId);
+        return response;
+    }
+);
+
 export const updateBucketItem = createAsyncThunk(
     'bucket/updateBucketItem',
     async (carId, updateCarDto) => {

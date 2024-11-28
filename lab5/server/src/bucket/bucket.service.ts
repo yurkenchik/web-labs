@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { BucketItem } from "./bucket-item.entity";
 import { CarService } from "../car/car.service";
-import { NotEnoughStockAvailableException } from "../exceptions/not-enough-stock-available.exception";
+import { NotEnoughStockAvailableException } from "../common/exceptions/not-enough-stock-available.exception";
 import { AddGoodToBucketDto } from "./add-good-to-bucket.dto";
 
 @Injectable()
@@ -15,10 +15,9 @@ export class BucketService {
     ) {}
 
     async addGoodToBucket(addGoodToBucketDto: AddGoodToBucketDto): Promise<BucketItem> {
-        const { carId, quantity } = addGoodToBucketDto
+        const { carId, quantity, year } = addGoodToBucketDto;
 
         const car = await this.carService.getCarById(carId);
-
         if (car.quantity < quantity) {
             throw new NotEnoughStockAvailableException();
         }
@@ -27,6 +26,7 @@ export class BucketService {
             .createQueryBuilder("bucketItem")
             .select()
             .where("bucketItem.car.id = :carId", { carId })
+            .andWhere("bucketItem.year = :year", { year })
             .getOne();
 
         if (bucketEntry) {
@@ -36,17 +36,23 @@ export class BucketService {
             }
             bucketEntry.quantity = totalQuantity;
         } else {
-            bucketEntry = this.bucketRepository.create({ car, quantity })
+            bucketEntry = this.bucketRepository.create({
+                car,
+                quantity,
+                year,
+            });
         }
 
+        await this.carService.updateCar(carId, car);
         await this.bucketRepository.save(bucketEntry);
+
         return bucketEntry;
     }
 
     async getBucketItem(bucketItemId: string): Promise<BucketItem> {
         const bucketItem = await this.bucketRepository
             .createQueryBuilder()
-            .where("id = :bucketItemId", { bucketItemId })
+            .where("id = :bucketItemId", {bucketItemId})
             .getOne();
 
         if (!bucketItem) {
@@ -55,16 +61,22 @@ export class BucketService {
         return bucketItem;
     }
 
+    async increaseBucketItemQuantity(bucketItemId: string): Promise<BucketItem> {
+        const bucketItem = await this.getBucketItem(bucketItemId);
+
+        bucketItem.quantity = bucketItem.quantity + 1;
+        return this.bucketRepository.save(bucketItem);
+    }
+
     async removeGoodFromBucket(bucketItemId: string): Promise<BucketItem> {
         const bucketItem = await this.getBucketItem(bucketItemId);
 
         if (bucketItem.quantity > 1) {
             bucketItem.quantity -= 1;
+            return await this.bucketRepository.save(bucketItem);
         } else {
             await this.deleteBucketItem(bucketItemId);
         }
-
-        return await this.bucketRepository.save(bucketItem);
     }
 
     async deleteBucketItem(bucketItemId: string): Promise<void> {

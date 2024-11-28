@@ -1,0 +1,40 @@
+.car-list-section {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    height: 100%;
+    padding-inline: 200px;
+}
+
+.car-list-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.button-container {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+}
+
+button {
+    width: 150px;
+    height: 60px;
+    font-size: 24px;
+    background-color: greenyellow;
+    border: none;
+    margin-inline: 10px;
+
+}

@@ -17,6 +17,11 @@ export class BucketController {
         return this.bucketService.getBucket();
     }
 
+    @Patch("/quantity-increase/:id")
+    async increaseBucketItem(@Param("id") bucketItemId: string): Promise<BucketItem> {
+        return this.bucketService.increaseBucketItemQuantity(bucketItemId);
+    }
+
     @Get(":id")
     async getBucketById(@Param("id") bucketItemId: string): Promise<BucketItem> {
         return this.bucketService.getBucketItem(bucketItemId);

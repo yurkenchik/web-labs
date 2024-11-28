@@ -6,6 +6,8 @@ import {ConfigModule, ConfigService} from "@nestjs/config";
 import {CarModule} from "../car/car.module";
 import {DatabaseService} from "../database/orm/database.service";
 import {BucketModule} from "../bucket/bucket.module";
+import {UserModule} from "../user/user.module";
+import {AuthModule} from "../auth/auth.module";
 
 @Module({
     imports: [
@@ -19,6 +21,8 @@ import {BucketModule} from "../bucket/bucket.module";
         }),
         CarModule,
         BucketModule,
+        UserModule,
+        AuthModule,
     ],
     controllers: [AppController],
     providers: [AppService, DatabaseService],
