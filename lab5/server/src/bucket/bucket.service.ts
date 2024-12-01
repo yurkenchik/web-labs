@@ -5,6 +5,7 @@ import { BucketItem } from "./bucket-item.entity";
 import { CarService } from "../car/car.service";
 import { NotEnoughStockAvailableException } from "../common/exceptions/not-enough-stock-available.exception";
 import { AddGoodToBucketDto } from "./add-good-to-bucket.dto";
+import {UserService} from "../user/user.service";
 
 @Injectable()
 export class BucketService {
@@ -12,11 +13,13 @@ export class BucketService {
         @InjectRepository(BucketItem)
         private readonly bucketRepository: Repository<BucketItem>,
         private readonly carService: CarService,
+        private readonly userService: UserService,
     ) {}
 
-    async addGoodToBucket(addGoodToBucketDto: AddGoodToBucketDto): Promise<BucketItem> {
+    async addGoodToBucket(userId: string, addGoodToBucketDto: AddGoodToBucketDto): Promise<BucketItem> {
         const { carId, quantity, year } = addGoodToBucketDto;
 
+        const user = await this.userService.getUserById(userId);
         const car = await this.carService.getCarById(carId);
         if (car.quantity < quantity) {
             throw new NotEnoughStockAvailableException();
@@ -40,6 +43,7 @@ export class BucketService {
                 car,
                 quantity,
                 year,
+                user
             });
         }
 
@@ -49,10 +53,11 @@ export class BucketService {
         return bucketEntry;
     }
 
-    async getBucketItem(bucketItemId: string): Promise<BucketItem> {
+    async getBucketItem(bucketItemId: string, userId: string): Promise<BucketItem> {
         const bucketItem = await this.bucketRepository
             .createQueryBuilder()
-            .where("id = :bucketItemId", {bucketItemId})
+            .where("id = :bucketItemId", { bucketItemId })
+            .andWhere("user.id = :userId", { userId })
             .getOne();
 
         if (!bucketItem) {
@@ -61,15 +66,15 @@ export class BucketService {
         return bucketItem;
     }
 
-    async increaseBucketItemQuantity(bucketItemId: string): Promise<BucketItem> {
-        const bucketItem = await this.getBucketItem(bucketItemId);
+    async increaseBucketItemQuantity(userId: string, bucketItemId: string): Promise<BucketItem> {
+        const bucketItem = await this.getBucketItem(bucketItemId, userId);
 
         bucketItem.quantity = bucketItem.quantity + 1;
         return this.bucketRepository.save(bucketItem);
     }
 
-    async removeGoodFromBucket(bucketItemId: string): Promise<BucketItem> {
-        const bucketItem = await this.getBucketItem(bucketItemId);
+    async removeGoodFromBucket(bucketItemId: string, userId: string): Promise<BucketItem> {
+        const bucketItem = await this.getBucketItem(bucketItemId, userId);
 
         if (bucketItem.quantity > 1) {
             bucketItem.quantity -= 1;
@@ -88,10 +93,13 @@ export class BucketService {
             .execute();
     }
 
-    async getBucket(): Promise<Array<BucketItem>> {
+    async getBucket(userId: string): Promise<Array<BucketItem>> {
+        const user = await this.userService.getUserById(userId);
+
         return this.bucketRepository
             .createQueryBuilder("bucketItem")
             .leftJoinAndSelect("bucketItem.car", "*")
+            .where("bucketItem.user.id = :userId", { userId: user.id })
             .getMany();
     }
 }

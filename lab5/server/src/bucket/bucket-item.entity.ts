@@ -5,14 +5,13 @@ import { PrimaryGeneratedColumn } from "typeorm/decorator/columns/PrimaryGenerat
 import { UpdateDateColumn } from "typeorm/decorator/columns/UpdateDateColumn";
 import { Entity } from "typeorm/decorator/entity/Entity";
 import { ManyToOne } from "typeorm/decorator/relations/ManyToOne";
+import { User } from "../user/user.entity";
+import {JoinTable} from "typeorm/browser";
 
 @Entity()
 export class BucketItem {
     @PrimaryGeneratedColumn("uuid")
     id: string;
-
-    @ManyToOne(() => Car, (car) => car.id, { eager: true })
-    car: Car;
 
     @Column({ type: 'integer', default: 1 })
     quantity: number;
@@ -25,4 +24,10 @@ export class BucketItem {
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @ManyToOne(() => Car, (car) => car.id, { eager: true })
+    car: Car;
+
+    @ManyToOne(() => User, (user) => user.bucketItems, { onDelete: "CASCADE" })
+    user: User;
 }

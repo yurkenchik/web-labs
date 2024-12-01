@@ -10,7 +10,10 @@ async function bootstrap() {
 
     app.useGlobalPipes(new ValidationPipe());
     app.setGlobalPrefix("api");
-    app.enableCors();
+    app.enableCors({
+        origin: "http://localhost:3000",
+        credentials: true,
+    });
 
     await app.listen(PORT, () => {
         console.log(`Server running on port: ${PORT}`);

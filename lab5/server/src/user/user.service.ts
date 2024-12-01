@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException} from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "./user.entity";
 import {InsertResult, Repository} from "typeorm";
@@ -25,6 +25,18 @@ export class UserService {
         return user;
     }
 
+    async getUserByEmail(email: string): Promise<User> {
+        const user = await this.userRepository
+            .createQueryBuilder()
+            .where("email = :email", { email })
+            .getOne();
+
+        if (!user) {
+            throw new UserNotFoundException();
+        }
+        return user;
+    }
+
     async createUser(createUserDto: CreateUserDto): Promise<User> {
         try {
             const userInsertResult: InsertResult = await this.userRepository
@@ -43,5 +55,16 @@ export class UserService {
             }
             throw new InternalServerErrorException();
         }
+    }
+
+    async deleteUser(userId: string): Promise<void> {
+        const user = await this.getUserById(userId);
+
+        await this.userRepository
+            .createQueryBuilder()
+            .delete()
+            .from(User)
+            .where("id = :userId", { userId: user.id })
+            .execute();
     }
 }

@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BucketItem } from "../bucket/bucket-item.entity";
 
 @Entity()
 export class User {
@@ -19,4 +20,7 @@ export class User {
 
     @Column({ type: "varchar", nullable: false })
     confirmPassword: string;
+
+    @OneToMany(() => BucketItem, (bucketItem) => bucketItem.user, { cascade: true })
+    bucketItems: BucketItem[];
 }

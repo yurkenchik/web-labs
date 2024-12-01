@@ -5,6 +5,7 @@ import {join} from "path";
 import {Car} from "../../car/car.entity";
 import {TypeOrmOptionsFactory} from "@nestjs/typeorm";
 import {BucketItem} from "../../bucket/bucket-item.entity";
+import {User} from "../../user/user.entity";
 
 @Injectable()
 export class DatabaseService implements TypeOrmOptionsFactory {
@@ -20,7 +21,7 @@ export class DatabaseService implements TypeOrmOptionsFactory {
             username: this.configService.get<string>('DB_USER'),
             password: this.configService.get<string>('DB_PASSWORD'),
             database: this.configService.get<string>('DB_NAME'),
-            entities: [Car, BucketItem],
+            entities: [Car, BucketItem, User],
             synchronize: true,
             migrations: [join(__dirname, 'migrations/*.{js,ts}')],
             logging: true,
