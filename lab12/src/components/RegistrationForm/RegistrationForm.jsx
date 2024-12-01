@@ -4,6 +4,7 @@ import "./RegistrationForm.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from 'yup';
+import {AuthService} from "../../services/AuthService";
 
 const initialValues = {
     firstName: "",
@@ -24,7 +25,10 @@ const registerFormSchema = Yup.object().shape({
         .min(2, "Minimum 2 characters"),
     email: Yup.string()
         .required("Required")
-        .email("Invalid Email"),
+        .matches(
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            "Invalid Email"
+        ),
     password: Yup.string()
         .required("Required")
         .min(8, "Minimum 8 characters"),
@@ -34,13 +38,19 @@ const registerFormSchema = Yup.object().shape({
 });
 
 function RegistrationForm() {
+    const authService = new AuthService();
+
     const formik = useFormik({
         initialValues,
         validationSchema: registerFormSchema,
-        onSubmit: (values, { resetForm }) => {
-            localStorage.setItem("userData", JSON.stringify(values));
-            resetForm();
-            toast.success("Registered Successfully");
+        onSubmit: async (values, { resetForm }) => {
+            try {
+                const response = await authService.registration(values);
+                toast.success("Registration successful!");
+                resetForm(); // Reset form on success
+            } catch (error) {
+                toast.error("Registration failed. Please try again.");
+            }
         },
     });
 

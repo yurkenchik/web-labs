@@ -1,9 +1,9 @@
-import $API from "../utils/AxiosInstance";
+import $AUTHORIZED_API from "../utils/AxiosAuthInstance";
 
 export class BucketService {
     async addGoodToBucket(addGoodToBucketDto) {
         try {
-            const response = await $API.post('/api/bucket', addGoodToBucketDto);
+            const response = await $AUTHORIZED_API.post('/api/bucket', addGoodToBucketDto);
             return response.data;
         } catch (error) {
             const errorMessage =
@@ -16,29 +16,27 @@ export class BucketService {
 
     async getBuckets() {
         try {
-            const response = await $API.get('/api/bucket');
+            const response = await $AUTHORIZED_API.get('/api/bucket');
             return response.data;
         } catch (error) {
             console.error("Error fetching bucket items:", error);
-            alert(error.message);
             throw error;
         }
     }
 
     async getBucketById(bucketItemId) {
         try {
-            const response = await $API.get(`/api/bucket/${bucketItemId}`);
+            const response = await $AUTHORIZED_API.get(`/api/bucket/${bucketItemId}`);
             return response.data;
         } catch (error) {
             console.error(`Error fetching bucket item with ID ${bucketItemId}:`, error);
-            alert(error.message);
             throw error;
         }
     }
 
     async removeGoodFromBucket(bucketItemId) {
         try {
-            const response = await $API.patch(`/api/bucket/${bucketItemId}`);
+            const response = await $AUTHORIZED_API.patch(`/api/bucket/${bucketItemId}`);
             return response.data;
         } catch (error) {
             console.error(`Error removing good from bucket with ID ${bucketItemId}:`, error);
@@ -49,7 +47,7 @@ export class BucketService {
 
     async deleteBucketItem(bucketItemId) {
         try {
-            await $API.delete(`/api/bucket/${bucketItemId}`);
+            await $AUTHORIZED_API.delete(`/api/bucket/${bucketItemId}`);
         } catch (error) {
             console.error(`Error deleting bucket item with ID ${bucketItemId}:`, error);
             alert(error.message);

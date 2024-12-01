@@ -1,5 +1,4 @@
-// App.js
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -11,23 +10,48 @@ import { CarProvider } from "./context/CarContext";
 import CarDetail from "./components/CarDetail/CarDetail";
 import Bucket from "./components/Bucket/Bucket";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
+import LoginForm from "./components/LoginForm/LoginForm";
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
 
 function App() {
+    // Mock authentication state. Replace with your actual logic.
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
     return (
         <CarProvider>
             <Header />
             <Routes>
-                <Route path="/" element={
-                    <>
-                        <MainBanner />
-                        <CarList />
-                        <Feedback />
-                    </>
-                } />
+                {/* Public Routes */}
+                <Route path="/register" element={<RegistrationForm />} />
+                <Route path="/login" element={<LoginForm />} />
+
+                {/* Private Route for main page */}
+                <Route
+                    path="/"
+                    element={
+                        <PrivateRoute isAuthenticated={isAuthenticated}>
+                            <>
+                                <MainBanner />
+                                <CarList />
+                                <Feedback />
+                            </>
+                        </PrivateRoute>
+                    }
+                />
+
+                {/* Private Route for bucket */}
+                <Route
+                    path="/bucket"
+                    element={
+                        <PrivateRoute isAuthenticated={isAuthenticated}>
+                            <Bucket />
+                        </PrivateRoute>
+                    }
+                />
+
+                {/* Public Route */}
                 <Route path="/catalog" element={<CarList />} />
                 <Route path="/car/:id" element={<CarDetail />} />
-                <Route path="/bucket" element={<Bucket />} />
-                <Route path="/register" element={<RegistrationForm/>} />
             </Routes>
             <Footer />
         </CarProvider>
