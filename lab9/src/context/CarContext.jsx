@@ -16,14 +16,12 @@ export const CarProvider = ({ children }) => {
         setLoading(true);
         setError(null);
 
-        // Creating the filter options for the API call
         const filterOptions = {
             searchTerm: searchTerm.trim() || null,
             sortOrder: sortOrder || "asc"
         };
 
         try {
-            // Call to the updated CarService function
             const cars = await carService.getCars(filterOptions);
             setFilteredCars(cars);
         } catch (err) {
@@ -34,7 +32,6 @@ export const CarProvider = ({ children }) => {
         }
     };
 
-    // Fetch cars whenever search term or sort order changes
     useEffect(() => {
         fetchCars();
     }, [searchTerm, sortOrder]);
